@@ -1,12 +1,13 @@
 import "./App.css";
-import firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import "firebase/analytics";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
-firebase.initializeApp({
+const app = initializeApp({
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
   projectId: process.env.FIREBASE_PROJECT_ID,
@@ -14,14 +15,16 @@ firebase.initializeApp({
   messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.FIREBASE_APP_ID,
 });
+const db = getFirestore();
+const auth = getAuth();
 
-const auth = firebase.auth();
-const firestore = firebase.firestore();
-
+const [user] = useAuthState(auth);
 function App() {
   return (
     <div className="App">
-      <header className="App-header"></header>
+      <header>
+        <h1>⚛️🔥💬</h1>
+      </header>
     </div>
   );
 }
